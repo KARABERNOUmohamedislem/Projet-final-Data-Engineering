@@ -4,10 +4,9 @@ from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 import numpy as np
 import pandas as pd
-from sklearn.manifold import TSNE
 from prince import PCA as PrincePCA
+from sklearn.manifold import TSNE
 import umap
-
 
 def dim_red(mat, p, method):
     '''
