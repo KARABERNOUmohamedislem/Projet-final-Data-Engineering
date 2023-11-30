@@ -22,42 +22,42 @@ Here we explain the purpose of each branch in the repository.
 
 ### Main
 
-\t The main branch where we merge all of our approved and tested changes. This branch contains the last version of the project.
+The main branch where we merge all of our approved and tested changes. This branch contains the last version of the project.
 
 
 ### feature_UMAP_Kmeans
 
-\t The branch where we implemented and tested the UMAP algorithm followed by the KMeans algorithm.
+The branch where we implemented and tested the UMAP algorithm followed by the KMeans algorithm.
 
 
 ### feature_TSNE_KMEANS
 
-\t The branch where we implemented and tested the TSNE algorithm followed by the KMeans algorithm.
+The branch where we implemented and tested the TSNE algorithm followed by the KMeans algorithm.
 
 
 ### feature_acp_kmeans
 
-\t The branch where we implemented and tested the PCA algorithm followed by the KMeans algorithm.
+The branch where we implemented and tested the PCA algorithm followed by the KMeans algorithm.
 
 
 ### docker_backbone
 
-\t The branch where we initialized docker and worked on the docker container.
+The branch where we initialized docker and worked on the docker container.
 
 
 ### tests_bonus
 
-\t In this branch we added some additional tests for hyper-parameter tunning, comparing between different dimensionality reduction algorithms and different clustering algorithms.
+In this branch we added some additional tests for hyper-parameter tunning, comparing between different dimensionality reduction algorithms and different clustering algorithms.
 
 
 ### feature_light
 
-\t In this branch we tested removing SentenceTransformer and replacing the dataset with csv files that contains embeddings and labels for a lighter and more efficient docker image.
+In this branch we tested removing SentenceTransformer and replacing the dataset with csv files that contains embeddings and labels for a lighter and more efficient docker image.
 
 
 ### Readme_update
 
-\t This branch was used to update the Readme file.
+This branch was used to update the Readme file.
 
 
 ## Usage
