@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimension Reduction and Clustering</title>
+</head>
+<body>
+    <h1>Choose Dimension Reduction and Clustering Algorithm</h1>
+    <form action="/process" method="post">
+        <label for="dimension_reduction">Dimension Reduction:</label>
+        <select name="dimension_reduction" id="dimension_reduction">
+            <option value="PCA">PCA</option>
+            <option value="UMPA">UMAP</option>
+            <option value="TSNE">TSNE</option>
+        </select>
+
+        <label for="clustering_algorithm">Clustering Algorithm:</label>
+        <select name="clustering_algorithm" id="clustering_algorithm">
+            <option value="KMeans">KMeans</option>
+            <option value="KNN">KNN</option>
+        </select>
+
+        <label for="n_components">Number of Components</label>
+        <input type="number" name="n_components" id="n_components">
+
+        <label for="n_clusters">Number of Clusters</label>
+        <input type="number" name="n_clusters" id="n_clusters">
+        <input type="submit" value="RUN">
+    </form>
+
+    <h1>Result</h1>
+    <img src="data:image/png;base64,{{ dim_image }}" alt="Components plot">
+    <img src="data:image/png;base64,{{ clust_image }}" alt="Clusters plot">
+
+</body>
+</html>
+

@@ -60,29 +60,30 @@ def clust(mat, k):
     
     return pred
 
-# import data
-ng20 = fetch_20newsgroups(subset='test')
-corpus = ng20.data[:2000]
-labels = ng20.target[:2000]
-k = len(set(labels))
+if __name__ == "__main__" : 
+    # import data
+    ng20 = fetch_20newsgroups(subset='test')
+    corpus = ng20.data[:2000]
+    labels = ng20.target[:2000]
+    k = len(set(labels))
 
-# embedding
-model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-embeddings = model.encode(corpus)
+    # embedding
+    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+    embeddings = model.encode(corpus)
 
-# Perform dimensionality reduction and clustering for each method
-methods = ['ACP', 'TSNE', 'UMAP']
-for method in methods:
-    # Perform dimensionality reduction
-    red_emb = dim_red(embeddings, 20, method)
+    # Perform dimensionality reduction and clustering for each method
+    methods = ['ACP', 'TSNE', 'UMAP']
+    for method in methods:
+        # Perform dimensionality reduction
+        red_emb = dim_red(embeddings, 20, method)
 
-    # Perform clustering
-    pred = clust(red_emb, k)
+        # Perform clustering
+        pred = clust(red_emb, k)
 
-    # Evaluate clustering results
-    nmi_score = normalized_mutual_info_score(pred, labels)
-    ari_score = adjusted_rand_score(pred, labels)
+        # Evaluate clustering results
+        nmi_score = normalized_mutual_info_score(pred, labels)
+        ari_score = adjusted_rand_score(pred, labels)
 
-    # Print results
-    print(f'Method: {method}\nNMI: {nmi_score:.2f} \nARI: {ari_score:.2f}\n')
+        # Print results
+        print(f'Method: {method}\nNMI: {nmi_score:.2f} \nARI: {ari_score:.2f}\n')
 
