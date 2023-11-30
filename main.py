@@ -36,7 +36,7 @@ def dim_red(mat, p, method):
         red_mat = mat[:,:p]
         
     else:
-        raise Exception("Please select one of the three methods : APC, AFC, UMAP")
+        raise Exception("Please select one of the three methods : APC, TSNE, UMAP")
     
     return red_mat
 
