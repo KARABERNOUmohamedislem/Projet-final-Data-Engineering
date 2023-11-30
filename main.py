@@ -1,6 +1,7 @@
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_score
 from sentence_transformers import SentenceTransformer
+from sklearn.cluster import KMeans
 import numpy as np
 import pandas as pd
 from prince import PCA as PrincePCA
@@ -25,10 +26,13 @@ def dim_red(mat, p, method):
         pca = pca.fit(df_embeddings)
         red_mat = pca.transform(df_embeddings).to_numpy()
         
-    elif method=='AFC':
-        red_mat = mat[:,:p]
+    elif method=='TSNE':
+        tsne = TSNE(n_components=p, random_state=42)
+    	  mat = tsne.fit_transform(mat)
+    	  red_mat = mat[:,:p]
         
     elif method=='UMAP':
+        mat = umap.UMAP(n_components=p).fit_transform(mat)
         red_mat = mat[:,:p]
         
     else:
@@ -50,9 +54,9 @@ def clust(mat, k):
         pred : list of predicted labels
     '''
     
-    kmeans = KMeans(n_clusters=k, random_state=42)
-    clusters = kmeans.fit(mat)
-    pred = kmeans.labels_
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(mat)
+    pred =  kmeans.labels_
     
     return pred
 
@@ -67,7 +71,7 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 embeddings = model.encode(corpus)
 
 # Perform dimensionality reduction and clustering for each method
-methods = ['ACP', 'AFC', 'UMAP']
+methods = ['ACP', 'TSNE', 'UMAP']
 for method in methods:
     # Perform dimensionality reduction
     red_emb = dim_red(embeddings, 20, method)
