@@ -1,6 +1,6 @@
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_score
-from sentence_transformers import SentenceTransformer
+#from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 import numpy as np
 import pandas as pd
@@ -62,14 +62,17 @@ def clust(mat, k):
 
 if __name__ == "__main__" : 
     # import data
-    ng20 = fetch_20newsgroups(subset='test')
-    corpus = ng20.data[:2000]
-    labels = ng20.target[:2000]
-    k = len(set(labels))
+    #ng20 = fetch_20newsgroups(subset='test')
+    #corpus = ng20.data[:2000]
+    #labels = ng20.target[:2000]
+    
 
     # embedding
-    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-    embeddings = model.encode(corpus)
+    #model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+    #embeddings = model.encode(corpus)
+    embeddings = np.genfromtxt('embeddings.csv', delimiter=",", skip_header=1)
+    labels = np.genfromtxt('labels.csv', delimiter=",", skip_header=1).astype(int)
+    k = len(set(labels))
 
     # Perform dimensionality reduction and clustering for each method
     methods = ['ACP', 'TSNE', 'UMAP']

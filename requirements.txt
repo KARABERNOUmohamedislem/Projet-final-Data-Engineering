@@ -1,4 +1,3 @@
-sentence-transformers
 prince
 umap-learn
 scikit-learn
