@@ -3,6 +3,9 @@ from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_
 from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 import numpy as np
+import pandas as pd
+from sklearn.manifold import TSNE
+from prince import PCA as PrincePCA
 import umap
 
 
@@ -25,9 +28,9 @@ def dim_red(mat, p, method):
         red_mat = pca.transform(df_embeddings).to_numpy()
         
     elif method=='TSNE':
-        tsne = TSNE(n_components=p, random_state=42)
-    	  mat = tsne.fit_transform(mat)
-    	  red_mat = mat[:,:p]
+        tsne = TSNE(n_components=3, random_state=42)
+        mat = tsne.fit_transform(mat)
+        red_mat = mat[:,:p]
         
     elif method=='UMAP':
         mat = umap.UMAP(n_components=p).fit_transform(mat)
