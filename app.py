@@ -4,7 +4,7 @@ import io
 import numpy as np
 import base64
 from main import dim_red, clust
-
+from clustering import other_clustering
 
 app = Flask(__name__)
 
@@ -27,8 +27,7 @@ def process():
     if clustering_algorithm == 'KMeans':
         pred = clust(mat, n_clusters)
     else:
-        # Handle other clustering algorithms
-        pass
+        pred = other_clustering(mat,n_clusters,clustering_algorithm)
 
     print(mat.shape)
     labels = np.genfromtxt('labels.csv', delimiter=",", skip_header=1).astype(int)
@@ -64,4 +63,4 @@ def process():
     return render_template('index.html', dim_image=dim_img_base64,clust_image= cl_img_base64)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0",debug=True, port=5000)
