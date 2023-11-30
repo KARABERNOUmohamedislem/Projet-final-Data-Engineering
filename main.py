@@ -1,7 +1,9 @@
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_score
 from sentence_transformers import SentenceTransformer
+from sklearn.cluster import KMeans
 import numpy as np
+import umap
 
 
 def dim_red(mat, p, method):
@@ -23,6 +25,7 @@ def dim_red(mat, p, method):
         red_mat = mat[:,:p]
         
     elif method=='UMAP':
+        mat = umap.UMAP(n_components=p).fit_transform(mat)
         red_mat = mat[:,:p]
         
     else:
@@ -44,7 +47,9 @@ def clust(mat, k):
         pred : list of predicted labels
     '''
     
-    pred = np.random.randint(k, size=len(corpus))
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(mat)
+    pred =  kmeans.labels_
     
     return pred
 
