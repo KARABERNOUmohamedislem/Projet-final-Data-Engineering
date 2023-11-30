@@ -1,7 +1,9 @@
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_score
 from sentence_transformers import SentenceTransformer
+from sklearn.cluster import KMeans
 import numpy as np
+import umap
 
 
 def dim_red(mat, p, method):
@@ -17,14 +19,18 @@ def dim_red(mat, p, method):
         red_mat : NxP list such that p<<m
     '''
     if method=='ACP':
-        red_mat = mat[:,:p]
+        df_embeddings = pd.DataFrame(mat, columns=[f"feature_{i}" for i in range(len(mat[0]))])
+        pca = PrincePCA(n_components=p)
+        pca = pca.fit(df_embeddings)
+        red_mat = pca.transform(df_embeddings).to_numpy()
         
     elif method=='TSNE':
         tsne = TSNE(n_components=p, random_state=42)
-    	mat = tsne.fit_transform(mat)
-    	red_mat = mat[:,:p]
+    	  mat = tsne.fit_transform(mat)
+    	  red_mat = mat[:,:p]
         
     elif method=='UMAP':
+        mat = umap.UMAP(n_components=p).fit_transform(mat)
         red_mat = mat[:,:p]
         
     else:
@@ -46,10 +52,9 @@ def clust(mat, k):
         pred : list of predicted labels
     '''
     
-    kmeans=KMeans(n_clusters=k)
+    kmeans = KMeans(n_clusters=k)
     kmeans.fit(mat)
-
-    pred = kmeans.labels_
+    pred =  kmeans.labels_
     
     return pred
 
