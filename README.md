@@ -1,18 +1,15 @@
-# Project Name
-
-Brief project description goes here.
+# Data Engineering final project
 
 ## Table of Contents
 
 - [Branches](#branches)
-  - [Main](#Main)
-  - [feature_UMAP_Kmeans](#feature_UMAP_Kmeans)
-  - [feature_TSNE_KMEANS](#feature_TSNE_KMEANS)
-  - [feature_acp_kmeans](#feature_acp_kmeans)
-  - [docker_backbone](#docker_backbone)
-  - [tests_bonus](#tests_bonus)
-  - [feature_light](#feature_light)
-  - [Readme_update](#Readme_update)
+  - [Main](#branch-1-name)
+  - [feature_UMAP_Kmeans](#branch-2-name)
+  - [feature_TSNE_KMEANS](#branch-3-name)
+  - [feature_acp_kmeans](#branch-4-name)
+  - [docker_backbone](#branch-5-name)
+  - [tests_bonus](#branch-6-name)
+  - [feature_light](#branch-7-name)
 
 ## Branches
 
@@ -45,7 +42,3 @@ In this branch we added some additional tests for hyper-parameter tunning, compa
 ### feature_light
 
 In this branch we tested removing SentenceTransformer and replacing the dataset with csv files that contains embeddings and labels for a lighter and more efficient docker image.
-
-### Readme_update
-
-The branch where we update the Readme file.
