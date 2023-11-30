@@ -19,8 +19,10 @@ def dim_red(mat, p, method):
     if method=='ACP':
         red_mat = mat[:,:p]
         
-    elif method=='AFC':
-        red_mat = mat[:,:p]
+    elif method=='TSNE':
+        tsne = TSNE(n_components=p, random_state=42)
+    	mat = tsne.fit_transform(mat)
+    	red_mat = mat[:,:p]
         
     elif method=='UMAP':
         red_mat = mat[:,:p]
@@ -44,7 +46,10 @@ def clust(mat, k):
         pred : list of predicted labels
     '''
     
-    pred = np.random.randint(k, size=len(corpus))
+    kmeans=KMeans(n_clusters=k)
+    kmeans.fit(mat)
+
+    pred = kmeans.labels_
     
     return pred
 
@@ -59,7 +64,7 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 embeddings = model.encode(corpus)
 
 # Perform dimensionality reduction and clustering for each method
-methods = ['ACP', 'AFC', 'UMAP']
+methods = ['ACP', 'TSNE', 'UMAP']
 for method in methods:
     # Perform dimensionality reduction
     red_emb = dim_red(embeddings, 20, method)
