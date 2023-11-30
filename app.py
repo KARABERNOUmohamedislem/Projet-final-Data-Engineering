@@ -63,4 +63,4 @@ def process():
     return render_template('index.html', dim_image=dim_img_base64,clust_image= cl_img_base64)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0",debug=True, port=5000)
