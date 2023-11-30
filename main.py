@@ -19,7 +19,10 @@ def dim_red(mat, p, method):
         red_mat : NxP list such that p<<m
     '''
     if method=='ACP':
-        red_mat = mat[:,:p]
+        df_embeddings = pd.DataFrame(mat, columns=[f"feature_{i}" for i in range(len(mat[0]))])
+        pca = PrincePCA(n_components=p)
+        pca = pca.fit(df_embeddings)
+        red_mat = pca.transform(df_embeddings).to_numpy()
         
     elif method=='AFC':
         red_mat = mat[:,:p]
@@ -46,7 +49,7 @@ def clust(mat, k):
     ------
         pred : list of predicted labels
     '''
-    
+   
     kmeans = KMeans(n_clusters=k)
     kmeans.fit(mat)
     pred =  kmeans.labels_
