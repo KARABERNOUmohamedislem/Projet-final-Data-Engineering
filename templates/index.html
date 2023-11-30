@@ -1,38 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimension Reduction and Clustering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .form {
+            display: flex;
+            max-width: 500px;
+            margin: auto;
+            flex-direction: column;
+        }
+
+        .form * {
+            padding: 10px;
+        }
+
+        .btn {
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: coral;
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+            border: none;
+        }
+
+        img {
+            margin: auto;
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Choose Dimension Reduction and Clustering Algorithm</h1>
-    <form action="/process" method="post">
+    <h1 class="title">Choose Dimension Reduction and Clustering Algorithm</h1>
+    <form class="form" action="/process" method="post">
         <label for="dimension_reduction">Dimension Reduction:</label>
         <select name="dimension_reduction" id="dimension_reduction">
-            <option value="PCA">PCA</option>
-            <option value="UMPA">UMAP</option>
+            <option value="ACP" selected>PCA</option>
+            <option value="UMAP">UMAP</option>
             <option value="TSNE">TSNE</option>
         </select>
 
         <label for="clustering_algorithm">Clustering Algorithm:</label>
         <select name="clustering_algorithm" id="clustering_algorithm">
-            <option value="KMeans">KMeans</option>
+            <option value="KMeans" selected>KMeans</option>
             <option value="KNN">KNN</option>
         </select>
 
         <label for="n_components">Number of Components</label>
         <input type="number" name="n_components" id="n_components">
 
-        <label for="n_clusters">Number of Clusters</label>
-        <input type="number" name="n_clusters" id="n_clusters">
-        <input type="submit" value="RUN">
+        <input class="btn" type="submit" value="RUN">
     </form>
 
-    <h1>Result</h1>
+    {% if dim_image or clust_image %}
+    <h1 class="title">Result</h1>
+    {% endif %}
+    {% if dim_image %}
     <img src="data:image/png;base64,{{ dim_image }}" alt="Components plot">
+    {% endif %}
+    {% if clust_image %}
     <img src="data:image/png;base64,{{ clust_image }}" alt="Clusters plot">
+    {% endif %}
 
 </body>
-</html>
 
+</html>
